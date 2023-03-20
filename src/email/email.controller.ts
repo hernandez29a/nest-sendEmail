@@ -21,13 +21,17 @@ export class EmailController {
   ) {}
 
   @Get()
-  async plainTextEmail(@Query('toemail') toemail) {
+  async plainTextEmail(
+    @Query('toemail') toemail,
+    @Query('subject') subject,
+    @Query('text') text,
+  ) {
     try {
       await this.emailService.sendMail({
         to: toemail,
         from: 'confeccionespeyber0410@gmail.com',
-        subject: 'Simple Plain Text',
-        text: 'Welcome to nestjs email demo',
+        subject: subject,
+        text: text,
       });
       return 'succes';
     } catch (error) {
